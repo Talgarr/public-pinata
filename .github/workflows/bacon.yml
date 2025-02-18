@@ -1,6 +1,8 @@
 name: bacon
 on:
   pull_request_target:
+  push:
+  issue_comment:
 
 jobs:
   poc:

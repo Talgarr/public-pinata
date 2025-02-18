@@ -1,4 +1,4 @@
-name: bacon
+name: bacons
 on:
   pull_request_target:
   push:

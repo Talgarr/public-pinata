@@ -7,6 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' }}
     steps:
-      - name: Run
-        run: gh pr merge
-      - uses: ad-m/github-push-action@v6
+      - name: Enable auto-merge for Dependabot PR
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GITHUB_TOKEN: ${{ steps.get_workflow_token.outputs.token }}

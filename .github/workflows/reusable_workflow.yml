@@ -3,11 +3,12 @@ name: reusable workflow
 on:
   workflow_call:
     
-permissions: {}
+permissions:
+  contents: write
   
 jobs:
   legit:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "legit"
+      - run: echo "pwn"
       

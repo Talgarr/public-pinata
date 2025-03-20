@@ -10,5 +10,5 @@ jobs:
   legit:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "pwn"
+      - run: echo "pwn1"
       

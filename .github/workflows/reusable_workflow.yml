@@ -1,0 +1,13 @@
+name: reusable workflow
+
+on:
+  workflow_call:
+    
+permissions: {}
+  
+jobs:
+  legit:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "legit"
+      

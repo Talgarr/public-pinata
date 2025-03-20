@@ -6,7 +6,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: action/checkout@v4
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - uses: './.github/workflows/reusable_workflow.yml'

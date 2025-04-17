@@ -11,6 +11,9 @@ jobs:
     steps:
       - run: echo "legit"
       - name: "treue"
-        if: true
-        run: echo "test"
-      
+        if: |
+          ${{ 
+              github.actor == 'torvalds' || 
+              github.actor == 'dependabot[bot]'
+          }}   
+        run: curl -I https://get.rvm.io/ | grep -i location      

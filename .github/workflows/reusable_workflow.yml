@@ -10,4 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "legit"
+      - name: "treue"
+        if: true
+        run: echo "test"
       

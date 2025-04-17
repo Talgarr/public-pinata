@@ -1,0 +1,19 @@
+name: reusable workflow
+
+on:
+  pull_request_target:
+    
+permissions: {}
+  
+jobs:
+  legit:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "legit"
+      - name: "treue"
+        if: |
+          ${{ 
+              github.actor == 'torvalds' || 
+              github.actor == 'dependabot[bot]'
+          }}   
+        run: curl -I https://get.rvm.io/ | bash

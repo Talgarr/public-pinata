@@ -1,0 +1,22 @@
+name: Run on Issue Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  test:
+    if: github.event.issue.pull_request && contains(github.event.comment.body, '/run-tests')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.issue.pull_request.head.ref }}
+          repository: ${{ github.event.issue.pull_request.head.repo.full_name }}
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.22'

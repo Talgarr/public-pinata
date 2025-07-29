@@ -1,0 +1,24 @@
+name: Release Checksum
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  calculate-sha256:
+    name: Calculate SHA-256
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download source code archives
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download ${{ github.event.release.tag_name }} --pattern '*.zip' --pattern '*.tar.gz'
+
+      - name: Calculate SHA-256 checksums
+        run: |
+          sha256sum *.tar.gz *.zip > SHA256SUMS
+          cat SHA256SUMS
